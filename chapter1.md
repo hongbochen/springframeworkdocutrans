@@ -27,6 +27,33 @@ Spring诞生自2003年，用于响应早期J2EE的复杂性。但是有些人认
 * Bean Validation
 * JPA
 * JMS
+* 还有有必要的用于事务协调的JTA/JCA设置
+
+Spring框架也支持依赖注入和通用注解特性，应用程序开发人员可能会选择这个特性去使用而不是由Spring框架提供的Spring特性机制。
+
+对于Spring框架5.0，Spring要求Jave EE 7 级\(例如Servlet 3.1+，JPA 2.1+\)作为最低要求 - 但是同时，当在运行时发生的时候，提供了在Java EE 8级别的新API的盒外集成。这使得Spring完全兼容Tomcat 8和Tomcat 9，WebSphere 9 和 JBoss EAP 7。
+
+随着时间的流逝，Java EE在应用开发中扮演的角色已经发生了转变。在Java EE和Spring的早期阶段，应用程序被创建并部署到应用程序服务器中。现在，随着Spring Boot的帮助，应用程序以设备和云友好的方式被创建，其实现方式为内置的Servlet容器和一些琐碎的改变。对于Spring框架5.0，一个WebFlux应用甚至不需要直接使用Servlet API，并且可以运行到不是Servlet容器的服务器中。
+
+Spring继续创新和演化。除了Spring框架，有一些其他项目，例如Spring Boot，Spring Security，Spring Data，Spring Cloud，Spring Batch等其他。一定要记住每一个项目都有他自己的源码仓库，问题追踪和发行节奏。查看spring.io/projects获取完整的Spring项目列表。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
