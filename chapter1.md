@@ -18,5 +18,17 @@ Spring是开源的。他有一个大的并且活跃的社区，并且基于多�
 
 ## 2、Spring和Spring框架的历史
 
+Spring诞生自2003年，用于响应早期J2EE的复杂性。但是有些人认为Java EE和Spring是竞争关系，Spring实际上与Java EE是互补的。Spring编程模型并不接受Java EE的规格，它集成了从Java EE中精心挑选的个别规格。
+
+* Servlet API
+* WebSocket API
+* Concurrency Utilities\(并发组件集\)
+* JSON Binding API\(JSON绑定API\)
+* Bean Validation
+* JPA
+* JMS
+
+
+
 
 
