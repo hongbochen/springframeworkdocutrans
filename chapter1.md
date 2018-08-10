@@ -35,19 +35,13 @@ Spring框架也支持依赖注入和通用注解特性，应用程序开发人�
 
 随着时间的流逝，Java EE在应用开发中扮演的角色已经发生了转变。在Java EE和Spring的早期阶段，应用程序被创建并部署到应用程序服务器中。现在，随着Spring Boot的帮助，应用程序以设备和云友好的方式被创建，其实现方式为内置的Servlet容器和一些琐碎的改变。对于Spring框架5.0，一个WebFlux应用甚至不需要直接使用Servlet API，并且可以运行到不是Servlet容器的服务器中。
 
-Spring继续创新和演化。除了Spring框架，有一些其他项目，例如Spring Boot，Spring Security，Spring Data，Spring Cloud，Spring Batch等其他。一定要记住每一个项目都有他自己的源码仓库，问题追踪和发行节奏。查看spring.io/projects获取完整的Spring项目列表。
+Spring继续创新和演化。除了Spring框架，有一些其他项目，例如Spring Boot，Spring Security，Spring Data，Spring Cloud，Spring Batch等其他。一定要记住每一个项目都有他自己的源码仓库，问题追踪和发行节奏。查看[spring.io/projects](https://spring.io/projects)获取完整的Spring项目列表。
 
+## 3、设计思想
 
+当你学习一个框架的时候，不仅仅要了解它做什么，还有了解它遵守的原则，这是非常重要的。这是Spring框架的指导原则：
 
-
-
-
-
-
-
-
-
-
+* 在各个层面提供选择。Spring让您推迟设计决策尽可能的晚。例如，你可以通过配置而不是修改你的代码来转换持久化提供者。同许多其他基础设施问题和与第三方API集成是真实的。
 
 
 
