@@ -47,5 +47,21 @@ Spring继续创新和演化。除了Spring框架，有一些其他项目，例�
 * 关注于API的设计。Spring团队投入了大量的思考和时间来制作API，这些API都是直观的，可以在很多版本和很多年中保存。
 * 对代码质量设置高标准。Spring框架强调了有意义的，当前的和精确的Javadoc。这是少数的可以声明包之间没有循环依赖的干净的代码结构的项目之一。
 
+## 4、回馈和贡献
+
+对于how-to问题或者是诊断或调试问题，我们建议使用StackOverflow，并在我们有一个[问题列表](https://spring.io/questions)，其中列举了可以使用的建议性的标签。如果你能相当确定在Spring框架中有一个问题或想要去建议一个特点，请使用[JIRA issue tracker](https://jira.spring.io/projects/SPR/issues/SPR-17129?filter=allopenissues)。
+
+如果你有一个解决办法或一个建议性的修改，你可以在 [Github](https://github.com/spring-projects/spring-framework)上提交一个请求。然而，一定要记住，除了最琐碎的问题，我们期望在问题追踪中提出一个标签，在这里可以进行讨论并且可以为以后的引用生成一个记录。
+
+对于更多的细节，请在顶层项目页面的CONTRIBUTING中查看指导。
+
+## 5、开始你的项目
+
+如果你刚刚使用Spring，你可以通过创建基于Spring-boot的应用来开始使用Spring框架。Spring Boot提供了一个快速的方式来创建成产就绪的基于Spring的应用。他基于Spring框架，通过配置支持约定，并且被设计来尽快速的运行。
+
+你可以使用[start.spring.io](https://start.spring.io)来生成一个基本的项目或者是遵循"Getting Started"指南，例如“Getting Started Building a RESTful Web Service”。更容易去理解，这些指南是非常专注于任务的，并且其中的大多数都是基于Spring Boot的。他们也会采用其他来自Spring套件中的项目，当你解决特殊问题的时候，你可以考虑他们。
+
+
+
 
 
