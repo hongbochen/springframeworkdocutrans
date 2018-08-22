@@ -18,5 +18,5 @@ _这一部分的指导文档覆盖了所有的完全集成到Spring框架中的�
 
 包`org.springframework.beans`和`org.springframework.context`是Spring框架的IoC容器的基础。`BeanFactory`接口提供了一个先进的配置机制能够管理任何类型的对象。`ApplicationContext`是BeanFactory的一个子接口。它增加了与Spring AOP特征的更加简单的集成；消息资源处理（用于国际化中），事件发布和应用层特定的上下文例如用于Web应用中的`WebApplicationContext。`
 
-简而言之，BeanFactory提供了配置框架
+简而言之，BeanFactory提供了配置框架和基本的功能，并且ApplicationContext添加了更多的企业特定的功能。ApplicationContext是BeanFactory的一个完备的超级，
 
