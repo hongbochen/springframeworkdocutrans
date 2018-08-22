@@ -24,7 +24,5 @@ _这一部分的指导文档覆盖了所有的完全集成到Spring框架中的�
 
 ### 1.2 容器概览
 
-
-
-
+接口`org.springframework.context.ApplicationContext`代表着Spring IoC容器并且负责实例化，配置和组装上述的beans。该容器使它的指令通过读取配置元数据作用于哪些对象去初始化，配置和组装。配置元数据表现在XML，Java注解或Java代码中。它允许您表达组成应用程度的对象以及这些对象之间的丰富的依赖性。
 
