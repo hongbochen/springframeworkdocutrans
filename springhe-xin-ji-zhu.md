@@ -47,25 +47,9 @@ _这一部分的指导文档覆盖了所有的完全集成到Spring框架中的�
 * 基于注解的配置：Spring 2.5引入了基于注解的配置元数据的支持。
 * 基于Java的配置：从Spring 3.0开始，很多由Spring的Java配置项目提供的特征变成了核心Spring框架的一部分。因此，你可以在你的应用程序类之外通过使用Java而不是XML文件来定义beans。为了使用这些新的特征，请查看`@Configuration`，`@Bean`，`@Import`和`@DependsOn`注解。
 
-Spring配置至少包含一个或超过一个容器必须要管理的bean定义。基于XML的配置元数据显示了这些beans在上层`<beans/>`元素中被配置成`<bean/>`元素。
+Spring配置至少包含一个或超过一个容器必须要管理的bean定义。基于XML的配置元数据显示了这些beans在上层`<beans/>`元素中被配置成`<bean/>`元素。Java配置典型地在一个`@Configuration`类中使用`@Bean`注解方法。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+这些bean定义对应于组成你的应用程序的实际对象。典型地就是你定义服务层对象，数据访问对象\(DAOs\)，表示对象，例如Struts `Action`实例，基础对象，例如Hibernate`SessionFactories`，JMS `Queues`等。
 
 
 
