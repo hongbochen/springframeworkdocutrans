@@ -28,3 +28,17 @@ _这一部分的指导文档覆盖了所有的完全集成到Spring框架中的�
 
 很多ApplicationContext接口的实现为开箱即用的。在独立的应用程序中，创建一个`ClassPathXmlApplicationContext`或`FileSystemXmlApplicationContext`的实例是通用的。虽然XML是定义配置元数据的原始格式，但是你可以通过提供少量的XML配置来指示容器使用Java注释或代码作为元数据格式，以声明性地支持这些附加的元数据格式。
 
+在大多数的应用程序场景中，不需要显式的用户代码来实例化Spring IoC容器的一个或多个实例。
+
+
+
+
+
+
+
+
+
+
+
+
+
