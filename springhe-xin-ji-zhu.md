@@ -137,9 +137,20 @@ _在你学习Spring的IoC容器之后，你可能想要了解更多的关于Spri
 
 bean定义跨越多个XML文件是有用的。通常情况下，每一个独立的XML配置文件在你的架构中代表一个逻辑层或模块。
 
-你可以使用应用上下文构造器从这些XML片段中加载bean定义。
+你可以使用应用上下文构造器从这些XML片段中加载bean定义。这个构造器采用多个`Resource`位置，就像在上一小节中展示的那样。相应替代的，使用一个或多个`<import/>`元素从其他一个或多个文件中加载bean定义。例如：
 
+```
+<beans>
+    <import resource="services.xml"/>
+    <import resource="resources/messageSource.xml"/>
+    <import resource="/resources/themeSource.xml"/>
 
+    <bean id="bean1" class="..."/>
+    <bean id="bean2" class="..."/>
+</beans>
+```
+
+在上面的示例中，额外的bean定义从三个文件中被加载上来：`services.xml`, `messageSource.xml`和`themeSource.xml`。
 
 
 
