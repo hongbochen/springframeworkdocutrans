@@ -78,59 +78,62 @@ Spring配置至少包含一个或超过一个容器必须要管理的bean定义�
 
 #### 1.2.2 实例化一个容器
 
-实例化一个Spring IoC容器是直截了当的。
+实例化一个Spring IoC容器是直截了当的。位置路径或提供给`AplicationContext`构造器的路径实际是资源字符串，它允许容器从外部资源，如本地文件系统，从Java `CLASSPATH`等中加载配置元数据。
 
+```
+ApplicationContext context = new ClassPathXmlApplicationContext("service.xml","daos.xml");
+```
 
+_在你学习Spring的IoC容器之后，你可能想要了解更多的关于Spring Resource的信息，正如在`Resource`中描述的，`Resource`提供了一个方便的机制用于从在URI语法中定义的位置中读取一个输入流。特别的，Resource路径被用于构建应用上下文，正如在`Application contexts和Resouces paths`中描述的。_
 
+下面的示例展示了服务层对象\(services.xml\)配置文件：
 
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!-- services -->
 
+    <bean id="petStore" class="org.springframework.samples.jpetstore.services.PetStoreServiceImpl">
+        <property name="accountDao" ref="accountDao"/>
+        <property name="itemDao" ref="itemDao"/>
+        <!-- additional collaborators and configuration for this bean go here -->
+    </bean>
 
+    <!-- more bean definitions for services go here -->
 
+</beans>
+```
 
+下列示例展示了数据访问对象`daos.xml`文件：
 
+```
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <bean id="accountDao"
+        class="org.springframework.samples.jpetstore.dao.jpa.JpaAccountDao">
+        <!-- additional collaborators and configuration for this bean go here -->
+    </bean>
 
+    <bean id="itemDao" class="org.springframework.samples.jpetstore.dao.jpa.JpaItemDao">
+        <!-- additional collaborators and configuration for this bean go here -->
+    </bean>
 
+    <!-- more bean definitions for data access objects go here -->
 
+</beans>
+```
 
+在前面的例子中，服务层包含类`PetStoreServiceImpl`，还有两个类型为`JpaAccountDao`和`JpaItemDao（基于JPA的对象/关系映射标准）`的数据访问对象。`property name`元素指向JavaBean属性的名称，`ref`指向另外bean定义的名称。`id`和`ref`的链接表示协作对象之间的依赖。想要了解配置一个对象依赖的更多细节，请查看[依赖](/上述)。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+##### 组合基于XML配置的元数据
 
 
 
