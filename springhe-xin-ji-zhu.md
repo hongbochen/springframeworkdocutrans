@@ -84,7 +84,7 @@ Spring配置至少包含一个或超过一个容器必须要管理的bean定义�
 ApplicationContext context = new ClassPathXmlApplicationContext("service.xml","daos.xml");
 ```
 
-_在你学习Spring的IoC容器之后，你可能想要了解更多的关于Spring Resource的信息，正如在`Resource`中描述的，`Resource`提供了一个方便的机制用于从在URI语法中定义的位置中读取一个输入流。特别的，Resource路径被用于构建应用上下文，正如在`Application contexts和Resouces paths`中描述的。_
+_在你学习Spring的IoC容器之后，你可能想要了解更多的关于Spring Resource的信息，正如在_`Resource`_中描述的，_`Resource`_提供了一个方便的机制用于从在URI语法中定义的位置中读取一个输入流。特别的，Resource路径被用于构建应用上下文，正如在_`Application contexts和Resouces paths`_中描述的。_
 
 下面的示例展示了服务层对象\(services.xml\)配置文件：
 
@@ -135,15 +135,9 @@ _在你学习Spring的IoC容器之后，你可能想要了解更多的关于Spri
 
 ##### 组合基于XML配置的元数据
 
+bean定义跨越多个XML文件是有用的。通常情况下，每一个独立的XML配置文件在你的架构中代表一个逻辑层或模块。
 
-
-
-
-
-
-
-
-
+你可以使用应用上下文构造器从这些XML片段中加载bean定义。
 
 
 
