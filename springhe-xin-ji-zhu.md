@@ -49,9 +49,7 @@ _这一部分的指导文档覆盖了所有的完全集成到Spring框架中的�
 
 Spring配置至少包含一个或超过一个容器必须要管理的bean定义。基于XML的配置元数据显示了这些beans在上层`<beans/>`元素中被配置成`<bean/>`元素。Java配置典型地在一个`@Configuration`类中使用`@Bean`注解方法。
 
-这些bean定义对应于组成你的应用程序的实际对象。典型地就是你定义服务层对象，数据访问对象\(DAOs\)，表示对象，例如Struts `Action`实例，基础对象，例如Hibernate`SessionFactories`，JMS `Queues`等。
-
-
+这些bean定义对应于组成你的应用程序的实际对象。典型地就是你定义服务层对象，数据访问对象\(DAOs\)，表示对象，例如Struts `Action`实例，基础对象，例如Hibernate`SessionFactories`，JMS `Queues`等。通常情况下，容器中不配置细粒度域对象，因为通常创建和加载域对象是DAOs和业务逻辑的责任。
 
 
 
