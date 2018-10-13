@@ -150,7 +150,49 @@ bean定义跨越多个XML文件是有用的。通常情况下，每一个独立�
 </beans>
 ```
 
-在上面的示例中，额外的bean定义从三个文件中被加载上来：`services.xml`, `messageSource.xml`和`themeSource.xml`。
+在上面的示例中，额外的bean定义从三个文件中被加载上来：`services.xml`, `messageSource.xml`和`themeSource.xml`。在做importing的时候，所有位置路径都是与定义文件相对的，所以在做importing的时候，`service.xml`必须在相同的目录或作为文件的类路径的位置，然而`messageSource.xml`和`themeSource.xml`必须位于引入文件的位置下面的`resource`位置。正如你所看到的，主斜杠是被忽略的，但是考虑到这些路径都是相对的，不使用主斜杠是最好的形式。被引入文件的内容，包括顶层的`<bean/>`元素，根据Spring模式来说，都必须要是有效的XML的bean定义。
+
+使用相对路径"../"在父目录中引入文件是可以的，但是不被推荐的。这样做在文件中也就是在当前应用外面创建了一个依赖。特别地，对于“classpath:”路径\(例如，"classpath:../service.xml"\)来说这样的引用是不被推荐的。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
