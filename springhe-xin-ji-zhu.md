@@ -160,17 +160,64 @@ bean定义跨越多个XML文件是有用的。通常情况下，每一个独立�
 
 ##### Groovy Bean定义 DSL
 
-作为一个用于外部的配置元数据的例子，bean定义可以在Spring的Groovy Bean定义DSL中被表达，正如从Grails框架中所知道的那样。
+作为一个用于外部的配置元数据的例子，bean定义可以在Spring的Groovy Bean定义DSL中被表达，正如从Grails框架中所知道的那样。特别的，这样的配置将会和下面展示的一样作为一个结果存放在".groovy"文件中。
 
+```
+beans {
+    dataSource(BasicDataSource) {
+        driverClassName = "org.hsqldb.jdbcDriver"
+        url = "jdbc:hsqldb:mem:grailsDB"
+        username = "sa"
+        password = ""
+        settings = [mynew:"setting"]
+    }
+    sessionFactory(SessionFactory) {
+        dataSource = dataSource
+    }
+    myService(MyService) {
+        nestedBean = { AnotherBean bean ->
+            dataSource = dataSource
+        }
+    }
+}
+```
 
+这个配置样式很大程度上与XML的bean定义相同，甚至支持Spring的XML配置命名空间。这也允许直接通过一个"importBeans"来导入XML bean定义文件。
 
+#### 1.2.3. 使用容器
 
+`ApplicationContext`是能够维护不用bean及其依赖的注册表的高级工厂的接口。使用方法` T getBean(String name,Class<T> requiredType)`，你可以检索你的bean的实例。
 
+```
+// 创建和配置bean
+ApplicationContext context = new ClassPathXmlApplicationContext("services.xml","daos.xml");
+// 检索配置的实例
+PetStoreService service = context.getBean("petStore",PetStoreService.class);
+// 使用配置的实例
+List<String> userList = service.getUsernameList();
+```
 
+使用Groovy配置，bootstrapping看上去很相似，仅仅是一个不同的上下文实现类，该实现类是Groovy认识的。（但是也理解XML的bean定义）。
 
+```
+ApplicationContext context = new GenericGroovyApplicationContext("services.groovy","daos.groovy");
+```
 
+最灵活的变量便是与读者代理\(reader delegates\)，例如用于XML文件的`XmlBeanDefinitionReader`相结合的`GenericApplicationContext。`
 
+```
+GenericApplicationContext context = new GenericApplicationContext();
+new XmlBeanDefinitionReader(context).loadBeanDefinitions("services.xml", "daos.xml");
+context.refresh();
+```
 
+或者是用于Groovy文件的`GroovyBeanDefinitionReader`。
+
+```
+GenericApplicationContext context = new GenericApplicationContext();
+new GroovyBeanDefinitionReader(context).loadBeanDefinitions("services.groovy", "daos.groovy");
+context.refresh();
+```
 
 
 
