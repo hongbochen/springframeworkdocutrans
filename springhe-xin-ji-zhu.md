@@ -186,7 +186,7 @@ beans {
 
 #### 1.2.3. 使用容器
 
-`ApplicationContext`是能够维护不用bean及其依赖的注册表的高级工厂的接口。使用方法` T getBean(String name,Class<T> requiredType)`，你可以检索你的bean的实例。
+`ApplicationContext`是能够维护不用bean及其依赖的注册表的高级工厂的接口。使用方法`T getBean(String name,Class<T> requiredType)`，你可以检索你的bean的实例。
 
 ```
 // 创建和配置bean
@@ -218,6 +218,26 @@ GenericApplicationContext context = new GenericApplicationContext();
 new GroovyBeanDefinitionReader(context).loadBeanDefinitions("services.groovy", "daos.groovy");
 context.refresh();
 ```
+
+这样的阅读者代理可以混合的，并且可以在相同的应用上下文相匹配，如果希望的话，可以从不同的配置源读取bean定义。
+
+然后你可以使用`getBean`来取回你的bean的实例。`ApplicationContext`接口有一些其他的方法来取回beans，但是理想情况下你的应用代码中应该永远不使用他们。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
