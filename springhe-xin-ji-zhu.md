@@ -221,7 +221,84 @@ context.refresh();
 
 这样的阅读者代理可以混合的，并且可以在相同的应用上下文相匹配，如果希望的话，可以从不同的配置源读取bean定义。
 
-然后你可以使用`getBean`来取回你的bean的实例。`ApplicationContext`接口有一些其他的方法来取回beans，但是理想情况下你的应用代码中应该永远不使用他们。
+然后你可以使用`getBean`来取回你的bean的实例。`ApplicationContext`接口有一些其他的方法来取回beans，但是理想情况下你的应用代码中应该永远不使用他们。事实上，你的应用代码不应该有对`getBean()`方法的调用，因此，也不应该有对Spring API的依赖。例如，Spring伴随着web框架的集成为多个web框架组件，例如控制器和JSF管理beans，的依赖注入，允许你通过元数据在一特定的bean上声明一个依赖（例如autowiring注解）。
+
+
+
+### 1.3 Bean概览
+
+一个Spring IoC容器管理一个或多个beans。这些beans被你提供给容器的配置元数据创建（例如，XML中的`<bean/>`定义）。
+
+在容器本身，这些bean定义被代表成`BeanDefinition`对象，该对象包含下述元数据：
+
+* 包限定类名：特别的，被定义的bean的实际实现类。
+* Bean行为配置元素，这标记bean在容器内的行为（范围，声明周期回调等等）。
+* 该bean需要的其他bean的引用来做这个工作。这些引用也被称为协作者或依赖。
+* 在新的创建的对象中要去设置的其他配置设定 - 例如，池子的大小限制，或管理连接池的bean中要使用的连接数。
+
+这个元数据被翻译成一组属性来组成每一个bean定义。下面的表格描述了这些属性：
+
+| 属性 | 在...中描述 |
+| :--- | :--- |
+| Class | 实例化Beans |
+| Name | 命名Beans |
+| Scope | Beans范围 |
+| Constructor arguments | 依赖注入 |
+| Properties | 依赖注入 |
+| Autowiring mode | Autowiring 协作者 |
+| Lazy initialization mode | 懒实例化Beans |
+| Initialization method | 实例化回调 |
+| Destruction method | 析构回调 |
+
+除了包含如何创建一个特定bean的bean定义之外，`ApplicationContext`实现也允许在容器外被创建的现存的对象的注册。这可以通过`getBeanFactory()`方法访问ApplicationContext的BeanFactory来实现，这返回BeanFactory的`DefaultListableBeanFactory`的实现。`DefaultListableBeanFactory`支持通过`registerSingleton(..)`和`registerBeanDefinition(..)`来注册。然而，典型的应用程序只使用通过常规beans定义元数据定义的beans.
+
+
+
+> Bean元数据和人工提供的单实例需要尽早被注册，以便容器在autowiring阶段和其他自动创建阶段正确的解释他们。然而，重载现存的元数据和现存的单一实例在一定程度上是被支持的，新的beans的注册在运行时（同时访问工厂）是不被官方支持的，并且可能会导致同时访问异常，在bean容器中的 不一致的状态或两者都会发生。
+
+#### 1.3.1 命名Beans
+
+每一个bean都有一个或多个标识符。这些标识符在承载这个bean的容器中必须要是唯一的。一个bean通过仅有一个标识符。然而，如果他需要超过一个标识符，剩余的标识符被认为成别名。
+
+在基于XML的配置元数据中，你是用`id`属性，`name`属性或两者都使用来指定bean标识符。`id`属性允许你指定确切的一个id。按照惯例，这些名字是字母数字的（'myBean'，'someService'等等），但是他们也可以包含特殊的字符。如果你想要为该bean引入其他别名，你也可以在`name`属性中指定他们，通过逗号\(，\)，分号（；）或空格分隔。作为历史注释，在Spring 3.1之前的版本中，id属性本定义在`xsd:id`类型上，这约束了可能的字符。至于3.1，他被定义为`xsd:string`类型上。注意，bean id的唯一性依然被容器是强制的，虽然不再被XML解析器强制。
+
+你不需要必须为一个**bean**提供一个`name`或一个`id`属性。如果你不明显提供一个`name`或`id`属性，容器将会为该bean生成一个唯一的名字。然而，如果你想要通过name引用那个bean，
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
