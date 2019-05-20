@@ -223,8 +223,6 @@ context.refresh();
 
 然后你可以使用`getBean`来取回你的bean的实例。`ApplicationContext`接口有一些其他的方法来取回beans，但是理想情况下你的应用代码中应该永远不使用他们。事实上，你的应用代码不应该有对`getBean()`方法的调用，因此，也不应该有对Spring API的依赖。例如，Spring伴随着web框架的集成为多个web框架组件，例如控制器和JSF管理beans，的依赖注入，允许你通过元数据在一特定的bean上声明一个依赖（例如autowiring注解）。
 
-
-
 ### 1.3 Bean概览
 
 一个Spring IoC容器管理一个或多个beans。这些beans被你提供给容器的配置元数据创建（例如，XML中的`<bean/>`定义）。
@@ -252,8 +250,6 @@ context.refresh();
 
 除了包含如何创建一个特定bean的bean定义之外，`ApplicationContext`实现也允许在容器外被创建的现存的对象的注册。这可以通过`getBeanFactory()`方法访问ApplicationContext的BeanFactory来实现，这返回BeanFactory的`DefaultListableBeanFactory`的实现。`DefaultListableBeanFactory`支持通过`registerSingleton(..)`和`registerBeanDefinition(..)`来注册。然而，典型的应用程序只使用通过常规beans定义元数据定义的beans.
 
-
-
 > Bean元数据和人工提供的单实例需要尽早被注册，以便容器在autowiring阶段和其他自动创建阶段正确的解释他们。然而，重载现存的元数据和现存的单一实例在一定程度上是被支持的，新的beans的注册在运行时（同时访问工厂）是不被官方支持的，并且可能会导致同时访问异常，在bean容器中的 不一致的状态或两者都会发生。
 
 #### 1.3.1 命名Beans
@@ -262,45 +258,36 @@ context.refresh();
 
 在基于XML的配置元数据中，你是用`id`属性，`name`属性或两者都使用来指定bean标识符。`id`属性允许你指定确切的一个id。按照惯例，这些名字是字母数字的（'myBean'，'someService'等等），但是他们也可以包含特殊的字符。如果你想要为该bean引入其他别名，你也可以在`name`属性中指定他们，通过逗号\(，\)，分号（；）或空格分隔。作为历史注释，在Spring 3.1之前的版本中，id属性本定义在`xsd:id`类型上，这约束了可能的字符。至于3.1，他被定义为`xsd:string`类型上。注意，bean id的唯一性依然被容器是强制的，虽然不再被XML解析器强制。
 
-你不需要必须为一个**bean**提供一个`name`或一个`id`属性。如果你不明显提供一个`name`或`id`属性，容器将会为该bean生成一个唯一的名字。然而，如果你想要通过name引用那个bean，
+你不需要必须为一个**bean**提供一个`name`或一个`id`属性。如果你不明显提供一个`name`或`id`属性，容器将会为该bean生成一个唯一的名字。然而，如果你想要通过name引用那个bean，通过使用`ref`元素或`服务定位器`搜寻，你必须要提供一个名称。不提供一个名称的动机与使用`inner beans`和`autowiring 协作者`相关。
 
+> Bean命名惯例：当命名bean的时候，惯例就是为实例使用标准的Java惯例。也就是说，bean名称以小写字母开始，并且以驼峰式命名。这样命名的例子包含`accountManager`，`accountService`，`userDao`，`loginController`等等。
+>
+> 一致的命名bean使您的配置更易于阅读和理解。如果你使用Spring AOP，当将建议应用于与名称相关的一组bean时，它有很大的帮助。
 
+> 随着在类路径中组件的搜索，Spring 为未命名的组件生成bean名称，遵循上述描述的规则：基本上，采用简单的类命名并且转换这些初始的字符为小写字母。然而，在特别情况下，当超过一个字符并且第一个和第二个字符都是大写情况下，原来的例子被保存下载。这些是与定义在`java.beans.Introspector.decapitalize`的规则是一样的。
 
+**在Bean定义之外为一个Bean定义别名**
 
+在一个bean定义本身，你可以为bean提供超过一个名称，通过使用由`id`属性和`name`属性中任何其他名称指定的最多一个名称的组合。这些名称相当于相同bean的别名，并且在一些情况下是有用的，例如，在一个应用中让一个组件通过使用指定到那个组件的bean名称来引用一个通用的依赖。
 
+然而，在bean实际定义的地方指定所有的别名并不总是足够的。有时需要为在别处定义的bean引入别名。在大系统中，这是常用的例子，在这样的系统中，配置被分离到每一个子系统中，每一个子系统都有他自己的对象定义组。在基于XML的配置元数据中，你可以使用&lt;alias/&gt;元素来完成。下面的例子展示了如何去做：
 
+```
+<alias name="fromName" alias="toName" />
+```
 
+在这个例子中，一个bean被命名为`fromName`，在使用这个别名定义之后，被引用为`toName`。
 
+例如，用于子系统A的配置元数据通过名称`subsystemA-dataSource`来引用一个数据源。用于子系统B的配置元数据通过名称`subsystemB-dataSource`来引用一个数据源。当使用这两个子系统组成主应用的时候，该主应用程序通过名称`myApp-dataSource`引用数据源。为了让三个名称指向同一个对象，你可以添加下面的别名定义到配置元数据中：
 
+```
+<alias name="myApp-dataSource" alias="subsystemA-dataSource"/>
+<alias name="myApp-dataSource" alias="subsystemB-dataSource"/>
+```
 
+现在每一个组件和主程序可以通过唯一的名称引用数据源，并保证不会与任何其他定义（有效创建命名空间）冲突，因此他们指向相同的bean。
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+> Java配置：如果你是用Java配置，`@Bean`注解可以被使用来提供别名。查看使用`@Bean`注解了解详情。
 
 
 
