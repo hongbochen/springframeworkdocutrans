@@ -299,17 +299,36 @@ context.refresh();
 
 * 指定包含`static`工厂方法的实际的类，该方法被调用来创建对象，在不太通常的情况下，容器调用类中的`static`工厂方法来创建`bean`。从`static`工厂方法中返回的对象类型可能完全是相同的类或是其他类。
 
+> ```
+> 内部类名
+> ```
+>
+> ```
+> 如果你想要为一个static嵌套类配置一个bean定义，你必须使用嵌套类的二进制名称。
+>
+> 例如，如果在包com.example中有一个名字为SomeThing的类，并且这个SomeThing类有一个static的名称为OtherThing的嵌套类，
+> 在bean定义上的class属性应该为com.example.SomeThing$OtherThing。
+>
+> 注意，在名称中使用$来从外部类名称中分离嵌套类。
+> ```
 
+##### 使用构造器初始化
 
+当你使用构造器创建一个bean的时候，在Spring中，所有正常的类都是可用的并且兼容的。也就是说，正在开发的类不需要实现任何特定的接口或以不同的形式编码。仅仅是指定bean类应该就足够了。然而，依赖于为那个指定的bean你所使用的IoC的类型，你可能需要一个默认（空的）的构造器。
 
+实际上，Spring IoC容器能够管理你想要它管理的所有的类。他不被限制管理真正的Java Bean。大多数Spring用户更喜欢仅带有一个默认（没有参数）构造器的Javabean，并且在容器内的属性后面又正确的Setters和getters函数。您还可以在容器中拥有更多异域风情的非bean风格类。例如，如果你需要使用一个完全没有任何Javabean指定的旧连接池，Spring也可以管理他。
 
+使用基于XML的配置元数据，你可以向下述一样指定你的bean：
 
+```
+bean id="exampleBean" class="examples.ExampleBean"/>
 
+<bean name="anotherExample" class="examples.ExampleBeanTwo"/>
+```
 
+##### 使用静态工厂方法实例化
 
-
-
-
+当你是用一个静态工厂方法定义一个bean的时候，使用class属性来指定包含static工厂方法和一个名称为factory-method的类来指定工厂方法本身的名称。你应该能够调用这个方法（使用可选的参数）然后返回一个对象，它随后被视为是通过构造函数创建的。这样bean定义的使用在传统编码中被称为static工厂。
 
 
 
