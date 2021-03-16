@@ -20,7 +20,7 @@ _这一部分的指导文档覆盖了所有的完全集成到Spring框架中的�
 
 简而言之，`BeanFactory`提供了配置框架和基本的功能，并且`ApplicationContext`添加了更多的企业特定的功能。`ApplicationContext`是`BeanFactory`的一个完备的超级，并且被唯一使用在描述Spring IoC容器的这一章节中。关于使用`BeanFactory`而不是`ApplicationContext`的更多信息，请查看`1.16小节的BeanFactory的介绍`。
 
-在Spring中，那些组成你应用骨干的和那些被Spring IoC容器管理的对象被称为_beans_。一个Bean是一个被实例化的对象，组装的或其他被Spring IoC容器管理的对象。此外，简单的说，一个Bean就是你的应用程序中的对象中的一个。Beans和他们之间的依赖被映射到由容器使用的配置元数据中。
+在Spring中，那些组成你应用骨干的和那些被Spring IoC容器管理的对象被称为_beans_。一个Bean是一个被实例化的，组装的或其他被Spring IoC容器管理的对象。此外，简单的说，一个Bean就是你的应用程序中的对象中的一个。Beans和他们之间的依赖被映射到由容器使用的配置元数据中。
 
 ### 1.2 容器概览
 
@@ -74,7 +74,7 @@ Spring配置至少包含一个或超过一个容器必须要管理的bean定义�
 </beans>
 ```
 
-`id`属性是一个字符床，你可以使用该字符串来声明个人的bean定义。`class`属性定义bean的类型并且使用完全限定的类名。id属性的值指向协作对象。指向协作对象的XML没有在这个示例中展示出来；查看`依赖`获取更多信息。
+`id`属性是一个字符串，你可以使用该字符串来声明个人的bean定义。`class`属性定义bean的类型并且使用完全限定的类名。id属性的值指向协作对象。指向协作对象的XML没有在这个示例中展示出来；查看`依赖`获取更多信息。
 
 #### 1.2.2 实例化一个容器
 
@@ -188,6 +188,8 @@ beans {
 
 `ApplicationContext`是能够维护不用bean及其依赖的注册表的高级工厂的接口。使用方法`T getBean(String name,Class<T> requiredType)`，你可以检索你的bean的实例。
 
+ApplicationContext允许你读取bean定义并访问他们，就像下面的例子展示的那样：
+
 ```
 // 创建和配置bean
 ApplicationContext context = new ClassPathXmlApplicationContext("services.xml","daos.xml");
@@ -230,7 +232,7 @@ context.refresh();
 在容器本身，这些bean定义被代表成`BeanDefinition`对象，该对象包含下述元数据：
 
 * 包限定类名：特别的，被定义的bean的实际实现类。
-* Bean行为配置元素，这标记bean在容器内的行为（范围，声明周期回调等等）。
+* Bean行为配置元素，这标记bean在容器内的行为（范围，生命周期回调等等）。
 * 该bean需要的其他bean的引用来做这个工作。这些引用也被称为协作者或依赖。
 * 在新的创建的对象中要去设置的其他配置设定 - 例如，池子的大小限制，或管理连接池的bean中要使用的连接数。
 
