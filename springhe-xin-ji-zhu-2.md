@@ -18,15 +18,15 @@ DI主要有两种主要的变体：基于构造器的依赖注入和基于Setter
 public class SimpleMovieListener{
     // SimpleMovieListener有一个MovieFinder的依赖
     private MovieFinder movieFinder;
-    
+
     // Spring容器能够注入一个MovieFinder的构造器
     public SimpleMovieListener(MovieFinder movieFinder){
         this.movieFinder = movieFinder;
     }
-    
+
     // 实际使用被注入的MovieFinder的业务逻辑被省略...
 }
 ```
 
-
+注意，这个类并没有特别的地方。这就是一个没有依赖，没有容器特定的接口，基本类或注解的POJO\(Plain Ordinary Java Object，简单Java对象\)。
 
