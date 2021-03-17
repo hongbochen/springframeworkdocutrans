@@ -380,6 +380,7 @@ public class DefaultServiceLocator{
     public ClientService createClientServiceInstance(){
         return clientService;
     }
+}
 ```
 
 一个工厂类可以持有多个工厂方法，就像下面的例子展示的那样：
@@ -427,30 +428,4 @@ public class DefaultServiceLocator {
 一个特定的bean的运行时类型时很难确定的。在bean元数据定义中的特定的类仅仅是一个初始类的引用，并且有可能和一个声明的工厂方法或一个BeanFactory类相关联，该工厂方法或BeanFactory类可能会引导这个bean为一个不同的运行时类型，或者是在实例级工厂方法的情况下根本不设置（而是通过指定的factory-name名称来解决这个问题）。AOP代理可以用一个基于接口的代理来包装一个bean实例，并限制目标bean的实际类型的公开（仅仅他的实现接口）。
 
 获取一个特定bean的实际的运行时类型比较推荐的方法就是使用BeanFactory的getType方法。该调用会把上述所有的情况都考虑在内并且返回一个对象的类型。
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
