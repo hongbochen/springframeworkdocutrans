@@ -30,7 +30,7 @@ public class SimpleMovieListener{
 
 注意，这个类并没有特别的地方。这就是一个没有依赖，没有容器特定的接口，基本类或注解的POJO\(Plain Ordinary Java Object，简单Java对象\)。
 
-##### 构造器参数解析
+###### 构造器参数解析
 
 构造器参数解析匹配通过使用参数类型进行。如果在bean定义的构造器参数中没有潜在的歧义存在，则在bean实例化的时候，定义在bean定义中的构造器参数的顺序，也是这些参数被提供给合适的构造器的顺序。考虑下面一个类：
 
@@ -67,10 +67,10 @@ package examples;
 public class ExampleBean{
     // 计算最终答案的念书
     private int years;
-    
+
     // 生命，宇宙或一切的答案
     private String ultimateAnswer;
-    
+
     public ExampleBean(int years, String ultimateAnswer){
         this.year = year;
         this.ultimateAnswer = ultimateAnswer;
@@ -78,15 +78,58 @@ public class ExampleBean{
 }
 ```
 
+###### 构造器参数类型匹配
 
+在上述场景，如果通过使用`type`属性明确执行构造器参数的类型，容器能够使用类型匹配简单的类型。就像下面的例子一样：
 
+```
+<bean id="exampleBean" class="examples.ExampleBean">
+    <constructor-arg type="int" value="7500000"/>
+    <constructor-arg type="java.lang.String" value="42"/>
+</bean>
+```
 
+###### 构造器参数索引
 
+你可以使用`index`属性来明显的指定构造器参数的索引，就像下面的例子一样：
 
+```
+bean id="exampleBean" class="examples.ExampleBean">
+    <constructor-arg index="0" value="7500000"/>
+    <constructor-arg index="1" value="42"/>
+</bean>
+```
 
+除了解析多个简单值的歧义，如果一个构造器由两个相同类型的参数，指定参数索引可以解决歧义。
 
+> 构造器参数索引是从0开始的。
 
+###### 构造器参数名称
 
+你也可以使用构造器的参数名称来消除值歧义，就像下面的例子展示的：
+
+```
+<bean id="exampleBean" class="examples.ExampleBean">
+    <constructor-arg name="years" value="7500000"/>
+    <constructor-arg name="ultimateAnswer" value="42"/>
+</bean>
+```
+
+要注意，为了使得这个工作开箱即用，你的代码必须要使用debug模式进行编译，以使得Spring能够从构造器中找到参数名称。如果你不想或不能使你的代码在debug模式下进行编译，你可以使用`@ConstructorProperties`的JDK注解来明确的指定构造器参数的名称。下面使实例：
+
+```
+package examples;
+
+public class ExampleBean{
+    // 属性省略
+    
+    @ConstructorProperties({"years","ultimateAnswer"})
+    public ExampleBean(int years, String ultimateAnswer){
+        this.years = years;
+        this.ultimateAnswer = ultimateAnswer;
+    }
+}
+```
 
 
 
