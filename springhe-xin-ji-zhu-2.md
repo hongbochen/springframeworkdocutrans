@@ -12,5 +12,21 @@ DI主要有两种主要的变体：基于构造器的依赖注入和基于Setter
 
 ##### 基于构造器的依赖注入
 
-基于构造器的依赖注入是由容器调用一个带有多个参数的构造器实现的，构造器中的每一个参数都代表一个依赖。调用一个带有特定参数的`static`工厂方法来构建bean接近相同，这个讨论类似的处理构造函数和静态工厂方法的参数。
+基于构造器的依赖注入是由容器调用一个带有多个参数的构造器实现的，构造器中的每一个参数都代表一个依赖。调用一个带有特定参数的`static`工厂方法来构建bean接近相同，这个讨论类似的处理构造函数和静态工厂方法的参数。下述的例子展示了一个只能通过使用构造器注入进行依赖注入的类：
+
+```
+public class SimpleMovieListener{
+    // SimpleMovieListener有一个MovieFinder的依赖
+    private MovieFinder movieFinder;
+    
+    // Spring容器能够注入一个MovieFinder的构造器
+    public SimpleMovieListener(MovieFinder movieFinder){
+        this.movieFinder = movieFinder;
+    }
+    
+    // 实际使用被注入的MovieFinder的业务逻辑被省略...
+}
+```
+
+
 
