@@ -30,3 +30,65 @@ public class SimpleMovieListener{
 
 注意，这个类并没有特别的地方。这就是一个没有依赖，没有容器特定的接口，基本类或注解的POJO\(Plain Ordinary Java Object，简单Java对象\)。
 
+##### 构造器参数解析
+
+构造器参数解析匹配通过使用参数类型进行。如果在bean定义的构造器参数中没有潜在的歧义存在，则在bean实例化的时候，定义在bean定义中的构造器参数的顺序，也是这些参数被提供给合适的构造器的顺序。考虑下面一个类：
+
+```
+package x.y;
+
+public clas ThingOne{
+    public ThingOne(ThingTwo thingTwo, ThingThree thingThree){
+        // ...
+    }
+}
+```
+
+假设类`ThingTwo`和`ThingThree`没有继承关系，没有潜在的歧义存在。这样，下面的配置就是正常工作的，你不需要在`<constructor-arg/>`元素中明确的指定构造器参数的索引或类型。
+
+```
+<beans>
+    <bean id="beanOne" class="x.y.ThingOne">
+        <constructor-arg ref="beanTwo"/>
+        <constructor-arg ref="beanThree"/>
+    </bean>
+
+    <bean id="beanTwo" class="x.y.ThingTwo"/>
+
+    <bean id="beanThree" class="x.y.ThingThree"/>
+</beans>
+```
+
+当另外一个bean被引用，并且类型是已知的，也是可以匹配的（和上述例子一样）。当一个简单的类型被使用，例如`<value>true</value>`，Spring不能决定这个值的类型，因此在没有帮助的情况下不能匹配这个类型。考虑下面的类：
+
+```
+package examples;
+
+public class ExampleBean{
+    // 计算最终答案的念书
+    private int years;
+    
+    // 生命，宇宙或一切的答案
+    private String ultimateAnswer;
+    
+    public ExampleBean(int years, String ultimateAnswer){
+        this.year = year;
+        this.ultimateAnswer = ultimateAnswer;
+    }
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
