@@ -122,7 +122,7 @@ package examples;
 
 public class ExampleBean{
     // 属性省略
-    
+
     @ConstructorProperties({"years","ultimateAnswer"})
     public ExampleBean(int years, String ultimateAnswer){
         this.years = years;
@@ -130,6 +130,86 @@ public class ExampleBean{
     }
 }
 ```
+
+##### 基于Setter的依赖注入
+
+基于Setter的依赖注入，是当调用一个无参构造器或一个没有参数的静态工厂方法实例化一个bean之后，容器调用bean的setter方法完成的。
+
+下面的例子展示了一个仅仅能够使用单纯的setter注入来实现依赖注入的类。这个类是传统的Java。他是一个没有依赖，没有容器特定接口，没有基本类和注解的POJO。
+
+```
+public class SimpleMovieListener{
+    // SimpleMovieListener有MovieFinder的依赖
+    private MovieFinder movieFinder;
+    
+    // setter方法，因此Spring容易可以注入MovieFinder依赖
+    public void setMovieFinder(MovieFinder movieFinder){
+        this.movieFinder = movieFinder;
+    }
+}
+```
+
+`ApplicationContext`对他管理的bean支持基于构造器的依赖注入和基于setter方法的依赖注入。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
