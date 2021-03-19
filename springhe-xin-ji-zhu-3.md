@@ -48,19 +48,19 @@
 ```
 public class ExampleBean{
     private AnotherBean beanOne;
-    
+
     private YetAnotherBean beanTwo;
-    
+
     private int i;
-    
+
     public void setBeanOne(AnotherBean beanOne){
         this.beanOne = beanOne;
     }
-    
+
     public void setBeanTwo(YetAnotherBean beanTwo){
         this.beanTwo = beanTwo;
     }
-    
+
     public void setIntegerProperty(int i){
         this.i = i;
     }
@@ -91,9 +91,9 @@ public class ExampleBean{
 ```
 public class ExampleBean{
     private AnotherBean beanOne;
-    
+
     private YetAnotherBean beanTwo;
-    
+
     public ExampleBean(AnotherBean anotherBean, YetAnotherBean yetAnotherBean, int i){
         this.beanOne = anotherBean;
         this.beanTwo = yetAnotherBean;
@@ -140,5 +140,5 @@ public class ExampleBean {
 }
 ```
 
-静态工厂方法的参数有&lt;constructor-arg /&gt;元素提供，实际上与构造器实际被使用一样。由静态工厂方法返回的类的类型不必与包含静态工厂方法的类的类型相同（虽然在例子中是这样的）。一个实例（非静态）工厂方法可以以基本相同的方式使用（除了使用factory-bean属性而不是class属性之外），因为在这里不在讨论这些血祭。
+静态工厂方法的参数有&lt;constructor-arg /&gt;元素提供，实际上与构造器实际被使用一样。由静态工厂方法返回的类的类型不必与包含静态工厂方法的类的类型相同（虽然在例子中是这样的）。一个实例（非静态）工厂方法可以以基本相同的方式使用（除了使用factory-bean属性而不是class属性之外），因为在这里不在讨论这些细节。
 
